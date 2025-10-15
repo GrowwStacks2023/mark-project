@@ -13,6 +13,7 @@ import {
   Download,
   FileText,
   TrendingUp,
+  RefreshCw,
 } from 'lucide-react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -234,30 +235,24 @@ export default function EnterpriseApp() {
       </div>
 
       {isLoadingRecordings ? (
-        <div className="flex items-center justify-center py-20">
-          <Loader2 className="w-8 h-8 text-primary-600 animate-spin" />
-          <p className="text-gray-600 mt-4">Loading recordings from Fireflies...</p>
-          <p className="text-sm text-gray-500 mt-2">Check browser console (F12) for details</p>
+        <div className="flex flex-col items-center justify-center py-20">
+          <Loader2 className="w-12 h-12 text-blue-600 animate-spin mb-4" />
+          <p className="text-gray-900 font-semibold text-lg">Loading recordings from Fireflies...</p>
+          <p className="text-sm text-gray-500 mt-2">This may take a few moments</p>
         </div>
       ) : recordings.length === 0 ? (
         <Card>
           <CardContent className="p-12 text-center">
-            <Video className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h4 className="text-lg font-semibold text-gray-900">No recordings found</h4>
-            <p className="text-gray-600 mt-1">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center mx-auto mb-6">
+              <Video className="w-10 h-10 text-blue-600" />
+            </div>
+            <h4 className="text-2xl font-bold text-gray-900 mb-2">No recordings yet</h4>
+            <p className="text-gray-600 text-lg mb-6">
               Your recorded meetings will appear here after they finish processing.
             </p>
-            <div className="mt-4 p-4 bg-amber-50 border border-amber-200 rounded-lg text-left">
-              <p className="text-sm font-semibold text-amber-900 mb-2">Troubleshooting:</p>
-              <ul className="text-xs text-amber-800 space-y-1">
-                <li>1. Open browser console (F12) and check for API errors</li>
-                <li>2. Verify your Fireflies API key has 'read' permissions</li>
-                <li>3. Wait 5-10 minutes after meeting ends for processing</li>
-                <li>4. Check if recordings appear on fireflies.ai dashboard</li>
-              </ul>
-            </div>
-            <Button onClick={loadRecordings} className="mt-6" variant="secondary">
-              Check Again
+            <Button onClick={loadRecordings} className="mt-2" variant="secondary">
+              <RefreshCw className="w-4 h-4 mr-2" />
+              Refresh
             </Button>
           </CardContent>
         </Card>

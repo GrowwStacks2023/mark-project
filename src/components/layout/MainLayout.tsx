@@ -23,7 +23,6 @@ interface Tab {
 
 const tabs: Tab[] = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { id: 'meetings', label: 'All Meetings', icon: Calendar },
   { id: 'recordings', label: 'Recordings', icon: Video },
   { id: 'insights', label: 'AI Insights', icon: Brain },
 ];
