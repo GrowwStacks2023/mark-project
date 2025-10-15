@@ -266,6 +266,195 @@ export default function EnterpriseApp() {
     </div>
   );
 
+  const renderInsights = () => (
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-3xl font-bold text-gray-900">AI-Powered Insights</h2>
+        <p className="text-gray-600 mt-1">Actionable intelligence from your meetings</p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white rounded-2xl shadow-lg p-6 border-t-4 border-blue-500"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center">
+              <TrendingUp className="w-6 h-6 text-blue-600" />
+            </div>
+            <h3 className="text-lg font-bold text-gray-900">Meeting Productivity</h3>
+          </div>
+          <div className="space-y-3">
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-gray-600">Average Duration</span>
+              <span className="text-lg font-bold text-gray-900">42 min</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-gray-600">Attendance Rate</span>
+              <span className="text-lg font-bold text-green-600">94%</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-gray-600">On-Time Starts</span>
+              <span className="text-lg font-bold text-blue-600">87%</span>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="bg-white rounded-2xl shadow-lg p-6 border-t-4 border-emerald-500"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 flex items-center justify-center">
+              <CheckCircle2 className="w-6 h-6 text-emerald-600" />
+            </div>
+            <h3 className="text-lg font-bold text-gray-900">Action Items</h3>
+          </div>
+          <div className="space-y-3">
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-gray-600">Total Created</span>
+              <span className="text-lg font-bold text-gray-900">127</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-gray-600">Completed</span>
+              <span className="text-lg font-bold text-emerald-600">98</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-gray-600">Completion Rate</span>
+              <span className="text-lg font-bold text-emerald-600">77%</span>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="bg-white rounded-2xl shadow-lg p-6 border-t-4 border-violet-500"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-50 to-purple-50 flex items-center justify-center">
+              <Users className="w-6 h-6 text-violet-600" />
+            </div>
+            <h3 className="text-lg font-bold text-gray-900">Participation</h3>
+          </div>
+          <div className="space-y-3">
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-gray-600">Avg Attendees</span>
+              <span className="text-lg font-bold text-gray-900">8.4</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-gray-600">Active Speakers</span>
+              <span className="text-lg font-bold text-violet-600">6.2</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-gray-600">Engagement</span>
+              <span className="text-lg font-bold text-violet-600">High</span>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="bg-white rounded-2xl shadow-lg p-6"
+        >
+          <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <FileText className="w-5 h-5 text-blue-600" />
+            Top Discussion Topics
+          </h3>
+          <div className="space-y-3">
+            {[
+              { topic: 'Product Roadmap Q2', count: 12, color: 'blue' },
+              { topic: 'Budget Planning', count: 9, color: 'emerald' },
+              { topic: 'Team Hiring', count: 8, color: 'violet' },
+              { topic: 'Marketing Strategy', count: 7, color: 'amber' },
+              { topic: 'Customer Feedback', count: 6, color: 'rose' },
+            ].map((item, idx) => (
+              <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <div className={`w-2 h-2 rounded-full bg-${item.color}-500`} />
+                  <span className="font-medium text-gray-900">{item.topic}</span>
+                </div>
+                <span className="text-sm font-semibold text-gray-600">{item.count} mentions</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="bg-white rounded-2xl shadow-lg p-6"
+        >
+          <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <TrendingUp className="w-5 h-5 text-emerald-600" />
+            Recent Key Decisions
+          </h3>
+          <div className="space-y-4">
+            {[
+              {
+                decision: 'Approved Q2 marketing budget increase',
+                meeting: 'Budget Review',
+                date: '2 days ago',
+              },
+              {
+                decision: 'Launch product beta by end of month',
+                meeting: 'Product Planning',
+                date: '5 days ago',
+              },
+              {
+                decision: 'Hire 3 new engineers for platform team',
+                meeting: 'Team Expansion',
+                date: '1 week ago',
+              },
+              {
+                decision: 'Implement new customer feedback system',
+                meeting: 'Customer Success',
+                date: '1 week ago',
+              },
+            ].map((item, idx) => (
+              <div key={idx} className="p-4 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl border-l-4 border-emerald-500">
+                <p className="font-semibold text-gray-900 mb-1">{item.decision}</p>
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <span className="font-medium">{item.meeting}</span>
+                  <span>•</span>
+                  <span>{item.date}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+        className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl shadow-lg p-8 border border-blue-100"
+      >
+        <div className="flex items-start gap-4">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center flex-shrink-0">
+            <Brain className="w-7 h-7 text-white" />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">AI Recommendation</h3>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              Your team has 23% more meetings scheduled this week compared to last week. Consider consolidating similar topics to improve efficiency and reduce meeting fatigue. We've identified 4 meetings that could potentially be combined.
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+
   return (
     <MainLayout
       currentTab={currentTab}
@@ -283,13 +472,7 @@ export default function EnterpriseApp() {
           </div>
         )}
         {currentTab === 'recordings' && renderRecordings()}
-        {currentTab === 'insights' && (
-          <div className="text-center py-20">
-            <CheckCircle2 className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900">AI Insights</h3>
-            <p className="text-gray-600 mt-2">Analytics coming soon</p>
-          </div>
-        )}
+        {currentTab === 'insights' && renderInsights()}
       </AnimatePresence>
     </MainLayout>
   );

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Search, Grid, List, RefreshCw, LogOut } from 'lucide-react';
+import { Search, Grid, List, RefreshCw, LogOut, Clock, Calendar } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 import { useMeetingStore } from '../store/meetingStore';
@@ -202,41 +202,90 @@ export default function Dashboard() {
             <RefreshCw className="w-8 h-8 text-blue-600 animate-spin" />
           </div>
         ) : (
-          <div className="space-y-8">
+          <div className="space-y-10">
             {happeningNow.length > 0 && (
-              <section>
-                <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                  Happening Now
-                </h2>
-                <div className={`grid gap-4 ${viewMode === 'grid' ? 'md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+              >
+                <div className="mb-6">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="relative">
+                      <div className="w-3 h-3 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full animate-pulse" />
+                      <div className="absolute inset-0 w-3 h-3 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full animate-ping" />
+                    </div>
+                    <h2 className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                      Happening Now
+                    </h2>
+                    <span className="px-3 py-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-bold rounded-full">
+                      LIVE
+                    </span>
+                  </div>
+                  <p className="text-gray-600 text-sm">Join your active meetings</p>
+                </div>
+                <div className={`grid gap-6 ${viewMode === 'grid' ? 'md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
                   {happeningNow.map((meeting) => (
                     <MeetingCard key={meeting.id} meeting={meeting} />
                   ))}
                 </div>
-              </section>
+              </motion.section>
             )}
 
             {upcomingToday.length > 0 && (
-              <section>
-                <h2 className="text-xl font-bold text-gray-900 mb-4">Upcoming Today</h2>
-                <div className={`grid gap-4 ${viewMode === 'grid' ? 'md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+              >
+                <div className="mb-6">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center">
+                      <Clock className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-gray-900">
+                      Upcoming Today
+                    </h2>
+                    <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">
+                      {upcomingToday.length}
+                    </span>
+                  </div>
+                  <p className="text-gray-600 text-sm">Your meetings scheduled for today</p>
+                </div>
+                <div className={`grid gap-6 ${viewMode === 'grid' ? 'md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
                   {upcomingToday.map((meeting) => (
                     <MeetingCard key={meeting.id} meeting={meeting} />
                   ))}
                 </div>
-              </section>
+              </motion.section>
             )}
 
             {laterThisWeek.length > 0 && (
-              <section>
-                <h2 className="text-xl font-bold text-gray-900 mb-4">Later This Week</h2>
-                <div className={`grid gap-4 ${viewMode === 'grid' ? 'md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+              >
+                <div className="mb-6">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-50 to-purple-50 flex items-center justify-center">
+                      <Calendar className="w-5 h-5 text-violet-600" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-gray-900">
+                      Later This Week
+                    </h2>
+                    <span className="px-3 py-1 bg-violet-100 text-violet-700 text-xs font-bold rounded-full">
+                      {laterThisWeek.length}
+                    </span>
+                  </div>
+                  <p className="text-gray-600 text-sm">Upcoming meetings in the next 7 days</p>
+                </div>
+                <div className={`grid gap-6 ${viewMode === 'grid' ? 'md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
                   {laterThisWeek.map((meeting) => (
                     <MeetingCard key={meeting.id} meeting={meeting} />
                   ))}
                 </div>
-              </section>
+              </motion.section>
             )}
 
             {filteredMeetings.length === 0 && (
