@@ -2,10 +2,8 @@ import { ReactNode, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   LayoutDashboard,
-  Calendar,
   Video,
   Brain,
-  Settings,
   LogOut,
   RefreshCw,
   ChevronLeft,
@@ -15,7 +13,7 @@ import { cn } from '../../lib/utils';
 import { useAuthStore } from '../../store/authStore';
 import toast from 'react-hot-toast';
 
-export type TabId = 'dashboard' | 'meetings' | 'recordings' | 'insights';
+export type TabId = 'dashboard' | 'recordings' | 'insights';
 
 interface Tab {
   id: TabId;

@@ -198,77 +198,86 @@ export interface FirefliesTranscript {
 }
 
 export const fetchTranscripts = async (
-  limit: number = 100
+  limit: number = 50
 ): Promise<FirefliesTranscript[]> => {
   const apiKey = import.meta.env.VITE_FIREFLIES_API_KEY;
 
   if (!apiKey) {
-    console.error('Fireflies API key not configured');
+    console.error('❌ Fireflies API key not configured');
     return [];
   }
 
-  const query = `
-    query Transcripts($limit: Int) {
-      transcripts(limit: $limit) {
+  const query = `{
+    transcripts(limit: ${limit}) {
+      id
+      title
+      date
+      duration
+      transcript_url
+      audio_url
+      video_url
+      summary {
+        keywords
+        action_items
+        overview
+      }
+      speakers {
         id
-        title
-        date
-        duration
-        transcript_url
-        audio_url
-        video_url
-        summary {
-          keywords
-          action_items
-          overview
-          meeting_type
-          topics_discussed
-        }
-        speakers {
-          id
-          name
-        }
-        meeting_attendees {
-          displayName
-          email
-        }
+        name
+      }
+      meeting_attendees {
+        displayName
+        email
       }
     }
-  `;
+  }`;
 
   try {
+    console.log('🔄 Fetching transcripts from Fireflies...');
+    console.log('📝 Query:', query);
+    console.log('🔑 API Key exists:', !!apiKey);
+    console.log('🔑 API Key length:', apiKey?.length);
+
     const response = await fetch(FIREFLIES_API, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`,
       },
-      body: JSON.stringify({
-        query,
-        variables: { limit },
-      }),
+      body: JSON.stringify({ query }),
     });
 
-    const data = await response.json();
+    console.log('📡 Response status:', response.status);
+    console.log('📡 Response ok:', response.ok);
 
-    console.log('Fireflies API Response:', data);
+    const data = await response.json();
+    console.log('📦 Full API Response:', JSON.stringify(data, null, 2));
 
     if (!response.ok) {
-      console.error(`Fireflies API HTTP error: ${response.status}`, data);
+      console.error(`❌ HTTP error: ${response.status}`);
+      console.error('❌ Response data:', data);
       return [];
     }
 
     if (data.errors) {
-      console.error('Fireflies API GraphQL errors:', data.errors);
+      console.error('❌ GraphQL errors:', JSON.stringify(data.errors, null, 2));
       return [];
     }
 
     const transcripts = data.data?.transcripts || [];
-    console.log(`Fetched ${transcripts.length} transcripts from Fireflies`);
+    console.log(`✅ Successfully fetched ${transcripts.length} transcripts`);
+
+    if (transcripts.length > 0) {
+      console.log('📋 First transcript:', JSON.stringify(transcripts[0], null, 2));
+    }
 
     return transcripts;
   } catch (error) {
-    console.error('Error fetching transcripts:', error);
+    console.error('❌ Exception while fetching transcripts:', error);
+    if (error instanceof Error) {
+      console.error('❌ Error message:', error.message);
+      console.error('❌ Error stack:', error.stack);
+    }
     return [];
   }
 };
