@@ -14,6 +14,7 @@ import {
   FileText,
   TrendingUp,
   RefreshCw,
+  Brain,
 } from 'lucide-react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -70,7 +71,7 @@ export default function EnterpriseApp() {
     setIsLoadingRecordings(true);
     try {
       console.log('Loading recordings from Fireflies...');
-      const transcripts = await fetchTranscripts(100);
+      const transcripts = await fetchTranscripts(50);
 
       console.log('Received transcripts:', transcripts);
       setRecordings(transcripts);
