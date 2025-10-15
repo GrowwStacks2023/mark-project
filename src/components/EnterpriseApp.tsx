@@ -695,7 +695,7 @@ function RecordingCard({ recording }: RecordingCardProps) {
           </div>
         )}
 
-        {recording.summary?.action_items && recording.summary.action_items.length > 0 && (
+        {recording.summary?.action_items && Array.isArray(recording.summary.action_items) && recording.summary.action_items.length > 0 && (
           <div className="mt-4 pt-4 border-t border-gray-200">
             <p className="text-xs font-semibold text-gray-700 mb-2">Action Items:</p>
             <ul className="space-y-1">
